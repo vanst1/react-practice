@@ -27,6 +27,7 @@ export const App = () => {
   const [selectedUserId, setSelectedUserId] = useState(0);
   const [visibleProducts, setVisibleProducts] = useState(fullProducts);
   const [searchQuery, setSearchQuery] = useState('');
+  const filteredProducts = visibleProducts.filter(productn => productn.name.toLowerCase().includes(searchQuery.toLocaleLowerCase()));
 
   return (
     <div className="section">
@@ -226,7 +227,7 @@ export const App = () => {
             </thead>
 
             <tbody>
-              {visibleProducts.map(product => (
+              {filteredProducts.map(product => (
                 <tr data-cy="Product" key={product.id}>
                   <td className="has-text-weight-bold" data-cy="ProductId">
                     {product.id}
