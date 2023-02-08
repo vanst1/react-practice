@@ -26,6 +26,7 @@ const fullProducts = productsFromServer.map((product) => {
 export const App = () => {
   const [selectedUserId, setSelectedUserId] = useState(0);
   const [visibleProducts, setVisibleProducts] = useState(fullProducts);
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <div className="section">
@@ -79,13 +80,17 @@ export const App = () => {
                   type="text"
                   className="input"
                   placeholder="Search"
-                  value="qwe"
+                  value={searchQuery}
+                  onChange={(event) => {
+                    setSearchQuery(event.target.value);
+                  }}
                 />
 
                 <span className="icon is-left">
                   <i className="fas fa-search" aria-hidden="true" />
                 </span>
 
+                {searchQuery && (
                 <span className="icon is-right">
                   {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                   <button
@@ -94,6 +99,7 @@ export const App = () => {
                     className="delete"
                   />
                 </span>
+                )}
               </p>
             </div>
 
@@ -143,6 +149,7 @@ export const App = () => {
                 data-cy="ResetAllButton"
                 href="#/"
                 className="button is-link is-outlined is-fullwidth"
+                onClick={() => setSelectedUserId(0)}
               >
                 Reset all filters
               </a>
@@ -151,10 +158,13 @@ export const App = () => {
         </div>
 
         <div className="box table-container">
+          {visibleProducts.length === 0 && (
           <p data-cy="NoMatchingMessage">
             No products matching selected criteria
           </p>
+          )}
 
+          {visibleProducts.length > 0 && (
           <table
             data-cy="ProductTable"
             className="table is-striped is-narrow is-fullwidth"
@@ -238,6 +248,7 @@ export const App = () => {
               ))}
             </tbody>
           </table>
+          )}
         </div>
       </div>
     </div>
