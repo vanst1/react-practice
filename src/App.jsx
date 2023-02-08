@@ -165,13 +165,13 @@ export const App = () => {
         </div>
 
         <div className="box table-container">
-          {visibleProducts.length === 0 && (
+          {filteredProducts.length === 0 && (
           <p data-cy="NoMatchingMessage">
             No products matching selected criteria
           </p>
           )}
 
-          {visibleProducts.length > 0 && (
+          {filteredProducts.length > 0 && (
           <table
             data-cy="ProductTable"
             className="table is-striped is-narrow is-fullwidth"
